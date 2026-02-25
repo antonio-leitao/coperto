@@ -11,5 +11,4 @@ crate-type = ["cdylib"]
 numpy = "0.28.0"
 pyo3 = "0.28.0"
 ripser = "0.1.0"
-caravela = "0.1.1"
 anyhow = "1.0.102"

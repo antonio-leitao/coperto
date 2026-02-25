@@ -15,15 +15,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c08606f8c3cbf4ce6ec8e28fb0014a2c086708fe954eaa885384a6165172e7e8"
 
 [[package]]
-name = "caravela"
-version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0e63f4150fc201e4e6ae8d68c4691cc10c51b23dc4715497441f31e707be22b4"
-dependencies = [
- "num-traits",
-]
-
-[[package]]
 name = "cc"
 version = "1.2.56"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -38,7 +29,6 @@ name = "coperto"
 version = "0.1.4"
 dependencies = [
  "anyhow",
- "caravela",
  "numpy",
  "pyo3",
  "ripser",
