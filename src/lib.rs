@@ -5,6 +5,7 @@ mod cone;
 mod distance_matrix;
 mod linkage;
 mod preprocess;
+use pyo3::exceptions::PyRuntimeError;
 use pyo3::prelude::*;
 
 #[pyfunction(name = "persistent_homology")]
