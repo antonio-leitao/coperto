@@ -1,6 +1,6 @@
 [project]
 name = "coperto"
-version = "0.1.5"
+version = "0.1.7"
 requires-python = ">=3.10"
 authors = [
   { name="António Leitão", email="antonio.lagedesousaleitao@sns.it" },
