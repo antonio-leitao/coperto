@@ -17,12 +17,13 @@ pub fn persistent_homology(
     greedy: bool,
     use_128bit: bool,
 ) -> PyResult<Vec<(i32, f32, f32)>> {
-    // Reject use_128bit on Windows at runtime
-    #[cfg(target_os = "windows")]
+    // Reject use_128bit on platforms where ripser128 is not available
+    // (Windows, or 32-bit targets like armv7/x86)
+    #[cfg(not(all(not(target_os = "windows"), target_pointer_width = "64")))]
     if use_128bit {
         return Err(PyRuntimeError::new_err(
-            "use_128bit=True is not supported on Windows (MSVC lacks __int128 support). \
-             Use use_128bit=False or run on Linux/macOS.",
+            "use_128bit=True is not supported on this platform (requires 64-bit Linux/macOS). \
+             Use use_128bit=False.",
         ));
     }
 
@@ -88,7 +89,7 @@ pub fn persistent_homology(
         }
 
         let barcodes = if use_128bit {
-            #[cfg(not(target_os = "windows"))]
+            #[cfg(all(not(target_os = "windows"), target_pointer_width = "64"))]
             {
                 ripser::ripser128(
                     &tower.distances.data,
@@ -97,10 +98,10 @@ pub fn persistent_homology(
                     Some(radius),
                 )
             }
-            #[cfg(target_os = "windows")]
+            #[cfg(not(all(not(target_os = "windows"), target_pointer_width = "64")))]
             {
                 // This branch is unreachable because we return an error above,
-                // but we need it for the code to compile on Windows.
+                // but we need it for the code to compile on unsupported platforms.
                 unreachable!()
             }
         } else {
